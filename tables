@@ -1,0 +1,31 @@
+import psycopg2
+
+#connect to the db 
+con = psycopg2.connect(
+            host = "localhost",
+            database="anil1",
+            user = "postgres",
+            password = "anilreddy@123")
+            
+print("data base created")            
+
+#cursor 
+cur = con.cursor()  
+
+
+# to create a table
+
+CREATE TABLE IMAGE_TABLE ( image_id   INT GENERATED ALWAYS AS IDENTITY, 
+                           image_name VARCHAR(50), 
+                           image_content BLOB 
+                           ); 
+
+
+file = open ('Rose1.png','rb') 
+content = file.read () 
+file.close () 
+
+cur.execute("INSERT INTO image_table(image_name, image_content) VALUES (%s,%s) ", ('Rose.png', content)) 
+con.commit() 
+print("Inserted")
+con.close() 

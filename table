@@ -1,0 +1,35 @@
+
+# to create a tables, and tried to implement in python to store in postgre database
+
+import psycopg2
+
+#connect to the db 
+con = psycopg2.connect(
+            host = "localhost",
+            database="anil1",
+            user = "postgres",
+            password = "anilreddy@123")
+            
+print("data base created")            
+
+#cursor 
+cur = con.cursor()  
+
+
+cur =con.cursor()
+cur.execute("INSERT INTO employe5 (ID , NAME, EMAIL) VALUES (4,'IL','A@GMIAL')")
+con.commit()
+print("Inserted succefully")
+
+cur.execute("SELECT ID,NAME,EMAIL FROM employe5")
+
+rows =cur.fetchall()
+
+
+for data in rows:
+    #print ("ID :"+ data[0])
+    print ("NAME :"+data[1])
+    print ("EMAIL:" + data[2])
+
+    print("selected succefully")
+    con.close()
